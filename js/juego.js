@@ -341,3 +341,71 @@ botonPausar.addEventListener("click", alternarPausa);
 actualizarMarcadores();
 dibujar();
 dibujarSiguiente();
+
+
+// ===============================
+// CONTROLES TÁCTILES (TABLET / MÓVIL)
+// ===============================
+const botonesTactiles = document.querySelectorAll("[data-accion]");
+let repeticionTactil = null;
+
+function ejecutarAccionTactil(accion) {
+  if (accion === "pausa") {
+    alternarPausa();
+    return;
+  }
+
+  if (!jugando || pausado || terminado || !piezaActual) return;
+
+  switch (accion) {
+    case "izquierda":
+      if (!hayColision(piezaActual, -1, 0)) piezaActual.x--;
+      break;
+    case "derecha":
+      if (!hayColision(piezaActual, 1, 0)) piezaActual.x++;
+      break;
+    case "abajo":
+      if (bajarPieza()) puntuacion++;
+      actualizarMarcadores();
+      break;
+    case "girar":
+      girarPieza();
+      break;
+    case "caida":
+      caidaInstantanea();
+      break;
+  }
+  dibujar();
+}
+
+botonesTactiles.forEach(boton => {
+  const accion = boton.dataset.accion;
+  const accionRepetible = ["izquierda", "derecha", "abajo"].includes(accion);
+
+  boton.addEventListener("pointerdown", evento => {
+    evento.preventDefault();
+    boton.setPointerCapture?.(evento.pointerId);
+    ejecutarAccionTactil(accion);
+
+    if (accionRepetible) {
+      clearInterval(repeticionTactil);
+      repeticionTactil = setInterval(() => ejecutarAccionTactil(accion), 115);
+    }
+  });
+
+  const detenerRepeticion = () => {
+    clearInterval(repeticionTactil);
+    repeticionTactil = null;
+  };
+
+  boton.addEventListener("pointerup", detenerRepeticion);
+  boton.addEventListener("pointercancel", detenerRepeticion);
+  boton.addEventListener("lostpointercapture", detenerRepeticion);
+  boton.addEventListener("contextmenu", evento => evento.preventDefault());
+});
+
+// No dejar que una pieza siga cayendo si se cambia de pestaña.
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden && jugando && !pausado) alternarPausa();
+});
+
