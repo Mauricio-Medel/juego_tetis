@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tetris - Juego en HTML</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/juego.js" defer></script>
+</head>
+<body>
+  <main class="contenedor">
+    <header class="encabezado">
+      <p class="etiqueta">ARCADE CLÁSICO</p>
+      <h1>TETRIS</h1>
+      <p class="subtitulo">Ordena las piezas, completa líneas y suma puntos.</p>
+    </header>
+
+    <section class="panel-juego" aria-label="Juego de Tetris">
+      <div class="zona-tablero">
+        <canvas id="tablero" width="300" height="600" aria-label="Tablero de Tetris"></canvas>
+        <div id="mensaje" class="mensaje" hidden>
+          <h2 id="mensaje-titulo">¡Juego terminado!</h2>
+          <p id="mensaje-texto">Tu partida ha finalizado.</p>
+          <button id="reiniciar-mensaje" class="boton boton-principal">Jugar de nuevo</button>
+        </div>
+      </div>
+
+      <aside class="panel-lateral">
+        <div class="tarjeta estadistica">
+          <span class="rotulo">PUNTUACIÓN</span>
+          <strong id="puntuacion">0</strong>
+        </div>
+        <div class="tarjeta estadistica">
+          <span class="rotulo">LÍNEAS</span>
+          <strong id="lineas">0</strong>
+        </div>
+        <div class="tarjeta estadistica">
+          <span class="rotulo">NIVEL</span>
+          <strong id="nivel">1</strong>
+        </div>
+        <div class="tarjeta siguiente">
+          <span class="rotulo">SIGUIENTE PIEZA</span>
+          <canvas id="siguiente" width="120" height="100" aria-label="Vista previa de la siguiente pieza"></canvas>
+        </div>
+        <button id="iniciar" class="boton boton-principal">Iniciar partida</button>
+        <button id="pausar" class="boton boton-secundario" disabled>Pausar</button>
+        <button id="reiniciar" class="boton boton-secundario">Reiniciar</button>
+        <div class="controles">
+          <h2>Controles</h2>
+          <p><kbd>←</kbd> <kbd>→</kbd> Mover</p>
+          <p><kbd>↑</kbd> Girar pieza</p>
+          <p><kbd>↓</kbd> Bajar rápido</p>
+          <p><kbd>Espacio</kbd> Caída instantánea</p>
+          <p><kbd>P</kbd> Pausar</p>
+        </div>
+      </aside>
+    </section>
+    <footer>Hecho con HTML, CSS y JavaScript. ¡Que comience el desafío!</footer>
+  </main>
+</body>
+</html>
