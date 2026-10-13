@@ -2,15 +2,16 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Juego de Tetris en HTML</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#101323">
+  <title>Tetris - Juego en HTML</title>
   <link rel="stylesheet" href="css/estilos.css">
   <script src="js/juego.js" defer></script>
 </head>
 <body>
   <main class="contenedor">
     <header class="encabezado">
-      <p class="etiqueta">JUEGO ARCADE CLÁSICO</p>
+      <p class="etiqueta">ARCADE CLÁSICO</p>
       <h1>TETRIS</h1>
       <p class="subtitulo">Ordena las piezas, completa líneas y suma puntos.</p>
     </header>
@@ -26,27 +27,46 @@
       </div>
 
       <aside class="panel-lateral">
-        <div class="tarjeta estadistica">
-          <span class="rotulo">PUNTUACIÓN</span>
-          <strong id="puntuacion">0</strong>
+        <div class="estadisticas">
+          <div class="tarjeta estadistica">
+            <span class="rotulo">PUNTUACIÓN</span>
+            <strong id="puntuacion">0</strong>
+          </div>
+          <div class="tarjeta estadistica">
+            <span class="rotulo">LÍNEAS</span>
+            <strong id="lineas">0</strong>
+          </div>
+          <div class="tarjeta estadistica">
+            <span class="rotulo">NIVEL</span>
+            <strong id="nivel">1</strong>
+          </div>
         </div>
-        <div class="tarjeta estadistica">
-          <span class="rotulo">LÍNEAS</span>
-          <strong id="lineas">0</strong>
-        </div>
-        <div class="tarjeta estadistica">
-          <span class="rotulo">NIVEL</span>
-          <strong id="nivel">1</strong>
-        </div>
+
         <div class="tarjeta siguiente">
           <span class="rotulo">SIGUIENTE PIEZA</span>
           <canvas id="siguiente" width="120" height="100" aria-label="Vista previa de la siguiente pieza"></canvas>
         </div>
+
         <button id="iniciar" class="boton boton-principal">Iniciar partida</button>
         <button id="pausar" class="boton boton-secundario" disabled>Pausar</button>
         <button id="reiniciar" class="boton boton-secundario">Reiniciar</button>
+
+        <section class="controles-tactiles" aria-label="Controles táctiles del juego">
+          <h2>Controles táctiles</h2>
+          <div class="fila-controles">
+            <button class="control control-direccion" data-accion="izquierda" aria-label="Mover a la izquierda">◀</button>
+            <button class="control control-girar" data-accion="girar" aria-label="Girar pieza">↻</button>
+            <button class="control control-direccion" data-accion="derecha" aria-label="Mover a la derecha">▶</button>
+          </div>
+          <div class="fila-controles">
+            <button class="control control-bajar" data-accion="abajo" aria-label="Bajar pieza">▼<span>Bajar</span></button>
+            <button class="control control-caida" data-accion="caida" aria-label="Caída instantánea">⤓<span>Caída rápida</span></button>
+          </div>
+          <p class="ayuda-tactil">Toca los botones o mantenlos pulsados para mover la pieza.</p>
+        </section>
+
         <div class="controles">
-          <h2>Controles</h2>
+          <h2>Controles de teclado</h2>
           <p><kbd>←</kbd> <kbd>→</kbd> Mover</p>
           <p><kbd>↑</kbd> Girar pieza</p>
           <p><kbd>↓</kbd> Bajar rápido</p>
